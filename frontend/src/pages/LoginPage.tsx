@@ -12,13 +12,14 @@ import { cn } from '@/lib/cn';
 import { primeAudio } from '@/lib/sound';
 import type { User } from '@/lib/types';
 
-// Light, professional role tint -- a left-edge accent bar + a matching role tag.
+// Warm, muted, professional role tint -- a left-edge accent bar + a matching role tag,
+// in the beige, taupe, brown, and gray family, keeping each role distinct.
 // Full literal class strings so Tailwind's content scanner keeps them.
 const ROLE_ACCENT: Record<string, { bar: string; tag: string }> = {
-  analyst: { bar: 'bg-blue-500', tag: 'bg-blue-50 text-blue-700 border-blue-200' },
-  engineer: { bar: 'bg-indigo-500', tag: 'bg-indigo-50 text-indigo-700 border-indigo-200' },
-  plant_manager: { bar: 'bg-amber-500', tag: 'bg-amber-50 text-amber-700 border-amber-200' },
-  supervisor: { bar: 'bg-green-500', tag: 'bg-green-50 text-green-700 border-green-200' },
+  analyst: { bar: 'bg-[#8C8174]', tag: 'bg-[#ECE8E1] text-[#5E564B] border-[#8C8174]' },
+  engineer: { bar: 'bg-[#5A4632]', tag: 'bg-[#EBE3D8] text-[#4A3826] border-[#5A4632]' },
+  plant_manager: { bar: 'bg-[#A8742F]', tag: 'bg-[#F1E7D3] text-[#7E4F14] border-[#A8742F]' },
+  supervisor: { bar: 'bg-[#A99685]', tag: 'bg-[#ECE4DC] text-[#6B5343] border-[#A99685]' },
 };
 const NEUTRAL_ACCENT = { bar: 'bg-slate-300', tag: 'bg-slate-100 text-slate-600 border-slate-200' };
 

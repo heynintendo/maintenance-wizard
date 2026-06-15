@@ -55,10 +55,12 @@ class LLMRegistry:
         s = self._settings
         if tier == "small":
             client = build_client(s.llm_small_provider, s.llm_small_model, self._resolve_key("small"),
-                                  tier="small", base_url=s.llm_small_base_url)
+                                  tier="small", base_url=s.llm_small_base_url,
+                                  request_timeout=s.llm_request_timeout)
         else:
             client = build_client(s.llm_large_provider, s.llm_large_model, self._resolve_key("large"),
-                                  tier="large", base_url=s.llm_large_base_url)
+                                  tier="large", base_url=s.llm_large_base_url,
+                                  request_timeout=s.llm_request_timeout)
         if s.llm_min_call_interval_s > 0 or s.llm_rate_limit_max_retries > 1:
             return RateLimitedClient(client, pacer=self._pacer,
                                      max_retries=s.llm_rate_limit_max_retries,

@@ -61,6 +61,13 @@ class Settings(BaseSettings):
     llm_rate_limit_max_retries: int = 1      # patient 429 retries (live = 1; capture ~10)
     llm_rate_limit_max_wait_s: float = 60.0  # cap on a single honored retry delay
 
+    # --- LLM per-call request timeout (LIVE provider client) ---
+    # A full multi-specialist run makes many large-context calls (70k+ input tokens), and a
+    # single large-tier completion can take well over a minute. The provider SDK default
+    # (Groq 60s) cut long calls off, so default to 180s. Env override: LLM_REQUEST_TIMEOUT.
+    # Applies to the live network client only; it never touches the cached/replay demo path.
+    llm_request_timeout: float = 180.0
+
     # --- Runtime data stores (rebuilt by build_index; gitignored) ---
     sqlite_path: str = str(SQLITE_DIR / "maintenance.db")
     vector_store_path: str = str(VECTOR_STORE_DIR)

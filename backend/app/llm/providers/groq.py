@@ -38,7 +38,13 @@ class GroqClient(LLMClient):
                 "Groq API key is not configured. Set LLM_SMALL_API_KEY / "
                 "LLM_LARGE_API_KEY in your environment or .env."
             )
-        return Groq(api_key=self.api_key)
+        # Per-call request timeout for the live client. The SDK default is 60s, which cut
+        # off long large-context completions; LLM_REQUEST_TIMEOUT (default 180s) raises it.
+        kwargs: dict[str, object] = {"api_key": self.api_key}
+        timeout = self.options.get("request_timeout")
+        if timeout is not None:
+            kwargs["timeout"] = float(timeout)
+        return Groq(**kwargs)
 
     def chat(
         self,

@@ -108,7 +108,7 @@ export const api = {
     apiFetch<Report>('/api/reports', {
       method: 'POST',
       body: { equipment_id },
-      signal: AbortSignal.timeout(40_000), // never hang the UI on a slow/rate-limited model
+      signal: AbortSignal.timeout(300_000), // a full live agentic run can take 1-3 min; allow up to 5
     }),
 
   logbook: (opts?: { equipment_id?: string; limit?: number }) =>

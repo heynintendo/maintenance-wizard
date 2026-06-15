@@ -33,10 +33,16 @@ class OpenAIClient(LLMClient):
                 "OpenAI-compatible API key is not configured. Set the tier's API key "
                 "(e.g. GEMINI_API_KEY for the Gemini capture endpoint)."
             )
+        # Per-call request timeout for the live client (LLM_REQUEST_TIMEOUT, default 180s),
+        # so long large-context completions are not cut off by a lower client default.
+        kwargs: dict[str, object] = {"api_key": self.api_key}
         base_url = self.options.get("base_url")
         if base_url:
-            return OpenAI(api_key=self.api_key, base_url=str(base_url))
-        return OpenAI(api_key=self.api_key)
+            kwargs["base_url"] = str(base_url)
+        timeout = self.options.get("request_timeout")
+        if timeout is not None:
+            kwargs["timeout"] = float(timeout)
+        return OpenAI(**kwargs)
 
     def chat(
         self,

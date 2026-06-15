@@ -115,4 +115,6 @@ frontend/src/      React SPA: pages, components, hooks, lib, auth
 
 ## Documentation
 
+See [`docs/DESIGN.md`](docs/DESIGN.md) for the full system design and submission document: problem context, architecture, technology stack, data and system flow, model design and reasoning pipeline, alerting logic, coverage of the required outputs, worked examples, installation, and limitations.
+
 See [`docs/architecture.md`](docs/architecture.md) for the layered architecture, data flow, and the reasoning pipeline, and [`docs/adr/`](docs/adr/) for the design decisions behind the data substrate, retrieval, ML layer, agent core, and the frontend.
